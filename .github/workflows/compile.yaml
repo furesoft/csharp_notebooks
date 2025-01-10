@@ -1,26 +1,32 @@
-name: Compile Typst files
+
+name: Compile to pdf
 
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    paths:
-      - '**/*.typ'
+    branches: [ "main" ]
   pull_request:
-    paths:
-      - '**/*.typ'
+    branches: [ "main" ]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  compile-typst-files:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
+      # Runs a single command using the runners shell
       - name: Set up Typst
         run: |
           curl -fsSL https://github.com/typst/typst/releases/download/v0.5.0/typst-0.5.0-linux-x86_64.tar.gz | tar -xz -C /usr/local/bin
           typst update
-
+    
       - name: Find and compile Typst files
         run: |
           # Find all .typ files and compile them to .pdf in ./pdf/ folder
@@ -29,6 +35,7 @@ jobs:
             mkdir -p "$(dirname "$output")"
             typst compile "$file" "$output"
           done
+          
       - name: GIT commit and push overriding conflicts with local changes (verbose)
         run: |
           git config --global user.name "github-actions[bot]"

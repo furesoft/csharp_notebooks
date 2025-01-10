@@ -42,5 +42,5 @@ jobs:
           git add pdf/*.pdf
           git commit -m "Compiled to pdf"
           git fetch origin
-          git rebase --strategy-option=theirs origin/main
+          git merge --strategy-option=theirs origin/main
           git push

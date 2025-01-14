@@ -23,9 +23,6 @@ string fullName = "John" + " " + "Doe";
 
 // Using string interpolation (C# 6.0+)
 string message = $"Welcome, {fullName}!";
-
-== Accessing Elements
-Access array elements using their index:
 ```
 
 == String Properties and Methods

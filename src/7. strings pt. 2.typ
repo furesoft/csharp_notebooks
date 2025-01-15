@@ -1,6 +1,6 @@
 == Strings in C\# Part 2
 
-In this section, we will explore escape sequences and raw strings in C#.
+In this section, we will explore escape sequences and raw strings in C\#.
 
 == Escape Sequences
 
